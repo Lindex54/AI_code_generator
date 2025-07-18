@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ClerkProviderWithRoutes } from "./auth/ClerkProviderWithRoutes.jsx";
+import ClerkProviderWithRoutes from "./auth/ClerkProviderWithRoutes.jsx";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./layout/Layout.jsx";
@@ -10,7 +9,14 @@ import AuthenticationPage from "./auth/AuthenticationPage.jsx";
 function App() {
   return (
     <ClerkProviderWithRoutes>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/sign-in/*" element={<AuthenticationPage />} />
+        <Route path="/sign-up" element={<AuthenticationPage />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<ChallengeGenerator />} />
+          <Route path="/history" element={<HistoryPanel />} />
+        </Route>
+      </Routes>
     </ClerkProviderWithRoutes>
   );
 }
