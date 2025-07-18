@@ -1,8 +1,7 @@
 import React from "react";
-import "react";
 
-const challengeGenerator = () => {
+const ChallengeGenerator = () => {
   return <div></div>;
 };
 
-export default challengeGenerator;
+export default ChallengeGenerator;
