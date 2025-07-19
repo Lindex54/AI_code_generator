@@ -1,6 +1,5 @@
 import "react";
-
-import React from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 const Layout = () => {
   return <div></div>;
