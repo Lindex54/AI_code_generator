@@ -1,5 +1,6 @@
 import "react";
 import { useState, useEffect } from "react";
+import MCQChallenge from "./MCQChallenge.jsx";
 // import { MCQChallenge } from "./MCQChallenge.jsx";
 
 const ChallengeGenerator = () => {
@@ -7,6 +8,7 @@ const ChallengeGenerator = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [difficulty, setDifficulty] = useState("easy");
+  const [quota, setQuota] = useState(null);
 
   const fetchQuota = async () => {};
 
