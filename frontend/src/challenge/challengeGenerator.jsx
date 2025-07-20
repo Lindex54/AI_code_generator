@@ -1,6 +1,6 @@
 import "react";
 import { useState, useEffect } from "react";
-import { MCQChallenge } from "./MCQChallenge.jsx";
+// import { MCQChallenge } from "./MCQChallenge.jsx";
 
 const ChallengeGenerator = () => {
   const [challenge, setChallenge] = useState(null);
@@ -22,8 +22,32 @@ const ChallengeGenerator = () => {
         {quota?.quota_remaining === 0 && <p>Next reset: {0}</p>}
       </div>
       <div className="difficulty-selector">
-        <label>Select Difficulty</label>
+        <label htmlFor="difficulty">Select Difficulty</label>
+        <select
+          id="difficulty"
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+          disabled={isLoading}
+        >
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
       </div>
+      <button
+        onClick={generateChallenge}
+        disabled={isLoading || quota?.quota_remaining === 0}
+        className="generate-button"
+      >
+        {isLoading ? "Generating..." : "Generate Challenge"}
+      </button>
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+        </div>
+      )}
+
+      {challenge && <MCQChallenge challenge={challenge} />}
     </div>
   );
 };
