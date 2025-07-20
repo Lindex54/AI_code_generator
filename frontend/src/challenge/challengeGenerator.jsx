@@ -14,7 +14,18 @@ const ChallengeGenerator = () => {
 
   const getNextResetTime = () => {};
 
-  return <div></div>;
+  return (
+    <div className="challenge-container">
+      <h2>Coding Challenge Generator</h2>
+      <div className="quota-display">
+        <p>Challenges remaining today: {quota?.quota_remaining || 0}</p>
+        {quota?.quota_remaining === 0 && <p>Next reset: {0}</p>}
+      </div>
+      <div className="difficulty-selector">
+        <label>Select Difficulty</label>
+      </div>
+    </div>
+  );
 };
 
 export default ChallengeGenerator;
