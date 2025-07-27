@@ -7,6 +7,14 @@ const HistoryPanel = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  const fetchHistory = async () => {
+    setIsLoading(false);
+  };
+
   return <div></div>;
 };
 
