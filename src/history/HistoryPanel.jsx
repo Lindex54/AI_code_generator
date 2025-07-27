@@ -23,11 +23,31 @@ const HistoryPanel = () => {
     return (
       <div className="erro-message">
         <p>{error}</p>
+        <button onClick={fetchHistory}>Retry</button>
       </div>
     );
   }
 
-  return <div></div>;
+  return (
+    <div className="history-panel">
+      <h2>History</h2>
+      {history.length === 0 ? (
+        <p>No challenge hisotry</p>
+      ) : (
+        <div className="history-list">
+          {history.map((challenge) => {
+            return (
+              <MCQChallenge
+                challenge={challenge}
+                key={challenge.id}
+                showExplanation
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default HistoryPanel;
