@@ -15,6 +15,18 @@ const HistoryPanel = () => {
     setIsLoading(false);
   };
 
+  if (isLoading) {
+    return <div className="loading">Loading history...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="erro-message">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   return <div></div>;
 };
 
