@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: backend
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: clerk-backend-api>=2.2.0
+Requires-Dist: fastapi>=0.115.12
+Requires-Dist: openai>=1.79.0
+Requires-Dist: python-dotenv>=1.1.0
+Requires-Dist: sqlalchemy>=2.0.41
+Requires-Dist: svix>=1.65.0
+Requires-Dist: uvicorn>=0.34.2
