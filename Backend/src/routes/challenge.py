@@ -32,8 +32,19 @@ async def generate_challenge(request: ChallengeRequest, db: Session = Depends(ge
             create_challenge_quota(db, user_id)
         
         quota = reset_quta_if_needed(db, quota)
+        
+        if quota.remaining_quota <= 0:
+            raise HTTPException(status_code=429, detail="Daily challenge quota exceeded")
+        
+        challenge_data = None
+        # TODO: generate challenge
+        
+        quota.remaining_quota -= 1
+        db.commit()
+        return challenge_data
+    
     except Exception as e:
-        pass
+        raise HTTPException(status_code=400, detail=str(e))
     
 
 @router.get("/my-history")
@@ -44,7 +55,7 @@ async def my_history(request: Request, db:Session = Depends(get_db)):
     challenges = get_user_challenges(db, user_id)
     return {"challenges": challenges}
 
-@router.get("/guota")
+@router.get("/quota")
 async def get_quota(request: Request, db: Session = Depends(get_db)):
     user_details = authenticate_and_get_user_details(request)
     user_id = user_details.get("user_id")
