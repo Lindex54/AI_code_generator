@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
-engine = create_engine('sqlite://database.db', echo = True)
+engine = create_engine('sqlite:///database.db', echo = True)
 Base = declarative_base()
 
 class Challenge(Base):
@@ -26,7 +26,7 @@ class ChallengeQuota(Base):
     quota_remaining = Column(Integer, nullable = False, default = 50)
     last_rest_date = Column(DateTime, default = datetime.now)
     
-Base.metadata.creat_all(engine)
+Base.metadata.create_all(engine)
 
 SessionLocal = sessionmaker(autocommit = False, autoflush = False, bind = engine)
 
