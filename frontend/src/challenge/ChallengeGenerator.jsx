@@ -1,6 +1,7 @@
 import "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import MCQChallenge from "./MCQChallenge.jsx";
+import { useApi } from "../utlis/api.js";
 // import { MCQChallenge } from "./MCQChallenge.jsx";
 
 const ChallengeGenerator = () => {
@@ -9,10 +10,25 @@ const ChallengeGenerator = () => {
   const [error, setError] = useState(null);
   const [difficulty, setDifficulty] = useState("easy");
   const [quota, setQuota] = useState(null);
+  const { makeRequest } = useApi();
 
-  const fetchQuota = async () => {};
+  useEffect(() => {
+    fetchQuota();
+  }, []);
 
-  const generateChallenge = async () => {};
+  const fetchQuota = async () => {
+    try {
+      const data = await makeRequest("quota");
+      setQuota(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const generateChallenge = async () => {
+    setIsLoading(true);
+    setError(null);
+  };
 
   const getNextResetTime = () => {};
 

@@ -22,6 +22,8 @@ export const useApi = () => {
       if (response.status === 429) {
         throw new Error("Daily quota exceeded");
       }
+      throw new Error(errorData?.detail || "Something went wrong");
     }
+    return response.json();
   };
 };
