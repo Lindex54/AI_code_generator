@@ -1,0 +1,9 @@
+# Ignore Hack language
+*.hack linguist-detectable=false
+
+# Treat JSX/TSX files as JS/TS (React)
+*.jsx linguist-language=JavaScript
+*.tsx linguist-language=TypeScript
+
+# Optional: mark build files as generated so they don’t count
+frontend/build/* linguist-generated=true

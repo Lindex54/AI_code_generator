@@ -1,2 +1,10 @@
-# Ignore env files
-src/.env
+# Python cache & build artifacts
+__pycache__/
+*.egg-info/
+*.egg
+backend.egg-info/
+backend.egg/
+
+
+# Lockfiles
+uv.lock
