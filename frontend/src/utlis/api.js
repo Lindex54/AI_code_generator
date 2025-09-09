@@ -26,4 +26,5 @@ export const useApi = () => {
     }
     return response.json();
   };
+  return { makeRequest };
 };

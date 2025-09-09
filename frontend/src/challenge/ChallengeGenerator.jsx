@@ -6,7 +6,7 @@ import { useApi } from "../utlis/api.js";
 
 const ChallengeGenerator = () => {
   const [challenge, setChallenge] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [difficulty, setDifficulty] = useState("easy");
   const [quota, setQuota] = useState(null);
@@ -28,16 +28,35 @@ const ChallengeGenerator = () => {
   const generateChallenge = async () => {
     setIsLoading(true);
     setError(null);
+    try {
+      const data = await makeRequest("generate-challenge", {
+        method: "POST",
+        body: JSON.stringify({ difficulty }),
+      });
+      setChallenge(data);
+      fetchQuota();
+    } catch (err) {
+      setError(err.message || "Faild to generate challenge");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const getNextResetTime = () => {};
+  const getNextResetTime = () => {
+    if (!quota?.last_reset_data) return null;
+    const resetDate = new Date(quota.last_reset_data);
+    resetDate.setHours(resetDate.getHours() + 24);
+    return resetDate;
+  };
 
   return (
     <div className="challenge-container">
       <h2>Coding Challenge Generator</h2>
       <div className="quota-display">
         <p>Challenges remaining today: {quota?.quota_remaining || 0}</p>
-        {quota?.quota_remaining === 0 && <p>Next reset: {0}</p>}
+        {quota?.quota_remaining === 0 && (
+          <p>Next reset: {getNextResetTime()?.toLocaleString()}</p>
+        )}
       </div>
       <div className="difficulty-selector">
         <label htmlFor="difficulty">Select Difficulty</label>
